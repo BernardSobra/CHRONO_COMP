@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Constantes\Constantes.csproj" />
+    <ProjectReference Include="..\Constantes\Constantes.csproj" />
     <Using Include="Xunit" />
   </ItemGroup>
 
