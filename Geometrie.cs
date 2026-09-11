@@ -71,13 +71,13 @@ namespace ChronoComp
             {
                 ETypePérimètre.MpRectangle => (2 * (longueur + largeur), ""),                 // 2(L + l)
                 ETypePérimètre.MpCarre => (4 * longueur, ""),                                  // 4c
-                ETypePérimètre.MpCercle => (2 * Math.PI * longueur, ""),                       // 2πr
+                ETypePérimètre.MpCercle => (2 * ValPI * longueur, ""),                       // 2πr
                 ETypePérimètre.MpTriangle => (longueur + largeur + hauteur, ""),               // a + b + c
                 ETypePérimètre.MpLosange => (4 * longueur, ""),                                // 4c (si côté)
                 ETypePérimètre.MpParallelogramme => (2 * (longueur + largeur), ""),            // 2(a + b)
                 ETypePérimètre.MpTrapeze => (longueur + largeur + hauteur + côté4, ""),        // somme des 4 côtés
                 // Approximation de Ramanujan : π [3(a + b) - √((3a + b)(a + 3b))] — longueur = a, largeur = b
-                ETypePérimètre.MpEllipse_Approx => (Math.PI * (3 * (longueur + largeur)
+                ETypePérimètre.MpEllipse_Approx => (ValPI * (3 * (longueur + largeur)
                     - Math.Sqrt((3 * longueur + largeur) * (longueur + 3 * largeur))), ""),
                 ETypePérimètre.MpArcCercle => (longueur * largeur, ""),                        // r * θ — longueur = rayon, largeur = angle (rad)
                 ETypePérimètre.MpSecteurCercle => (2 * longueur + longueur * largeur, ""),     // 2r + arc — largeur = angle (rad)
@@ -107,7 +107,7 @@ namespace ChronoComp
                 case ETypeSurface.MsCarre:
                     return (longueur * longueur, Constantes.C_Formule + "Long * Long");
                 case ETypeSurface.MsCercle:
-                    return (Math.PI * longueur * longueur, Constantes.C_Formule + "π * Long * Long");
+                    return (ValPI * longueur * longueur, Constantes.C_Formule + "π * Long * Long");
                 case ETypeSurface.MsLosange:
                     return (longueur * largeur / 2, Constantes.C_Formule + "(Long * Larg) / 2");
                 case ETypeSurface.MsTriangle_BH:
@@ -117,10 +117,10 @@ namespace ChronoComp
                 case ETypeSurface.MsTrapeze:
                     return ((longueur + largeur) * hauteur / 2, Constantes.C_Formule + "(Long + Larg) * Haut / 2");
                 case ETypeSurface.MsEllipse:
-                    return (Math.PI * longueur * largeur, Constantes.C_Formule + "π * Long * Larg");
+                    return (ValPI * longueur * largeur, Constantes.C_Formule + "π * Long * Larg");
                 case ETypeSurface.MsCouronneCirculaire:
                     // longueur = grand rayon (R), largeur = petit rayon (r)
-                    return (Math.Abs(Math.PI * (longueur * longueur - largeur * largeur)),
+                    return (Math.Abs(ValPI * (longueur * longueur - largeur * largeur)),
                         Constantes.C_Formule + "π * (Long² - Larg²)");
                 case ETypeSurface.MsTriangle_Heron:
                     // longueur = a, largeur = b, hauteur = c
@@ -137,7 +137,7 @@ namespace ChronoComp
                 case ETypeSurface.MsPolygoneRegulier_Rayon:
                     int n = (int)longueur;
                     if (n >= 3 && largeur > 0)
-                        return (n / 2.0 * (largeur * largeur) * Math.Sin(2.0 * Math.PI / n),
+                        return (n / 2.0 * (largeur * largeur) * Math.Sin(2.0 * ValPI / n),
                             Constantes.C_Formule + "(n / 2) * Larg² * sin(2π / n)");
                     return (0, Constantes.CErr_Descriptteur + " Moins de trois côtés, calcul impossible.");
                 case ETypeSurface.MsPolygoneRegulier_Apotheme:
@@ -168,15 +168,15 @@ namespace ChronoComp
                 EType3DSurface.Ms3Cube_Totale => (6 * longueur * longueur, Constantes.C_Formule + "6 * Long²"),
                 EType3DSurface.Ms3PaveDroit_Totale => (2 * (longueur * largeur + longueur * hauteur + largeur * hauteur),
                     Constantes.C_Formule + "2 * (Long*Larg + Long*Haut + Larg*Haut)"),
-                EType3DSurface.Ms3Cylindre_Laterale => (2 * Math.PI * longueur * hauteur, Constantes.C_Formule + "2π * Rayon * Haut"),
-                EType3DSurface.Ms3Cylindre_Totale => (2 * Math.PI * longueur * (hauteur + longueur),
+                EType3DSurface.Ms3Cylindre_Laterale => (2 * ValPI * longueur * hauteur, Constantes.C_Formule + "2π * Rayon * Haut"),
+                EType3DSurface.Ms3Cylindre_Totale => (2 * ValPI * longueur * (hauteur + longueur),
                     Constantes.C_Formule + "2π * Rayon * (Haut + Rayon)"),
                 // longueur = rayon, hauteur = génératrice
-                EType3DSurface.Ms3Cone_Laterale => (Math.PI * longueur * hauteur, Constantes.C_Formule + "π * Rayon * Génératrice"),
-                EType3DSurface.Ms3Cone_Totale => (Math.PI * longueur * (hauteur + longueur),
+                EType3DSurface.Ms3Cone_Laterale => (ValPI * longueur * hauteur, Constantes.C_Formule + "π * Rayon * Génératrice"),
+                EType3DSurface.Ms3Cone_Totale => (ValPI * longueur * (hauteur + longueur),
                     Constantes.C_Formule + "π * Rayon * (Génératrice + Rayon)"),
-                EType3DSurface.Ms3Sphere_Totale => (4 * Math.PI * longueur * longueur, Constantes.C_Formule + "4π * Rayon²"),
-                EType3DSurface.Ms3DemiSphere_Totale => (3 * Math.PI * longueur * longueur, Constantes.C_Formule + "3π * Rayon²"),
+                EType3DSurface.Ms3Sphere_Totale => (4 * ValPI * longueur * longueur, Constantes.C_Formule + "4π * Rayon²"),
+                EType3DSurface.Ms3DemiSphere_Totale => (3 * ValPI * longueur * longueur, Constantes.C_Formule + "3π * Rayon²"),
                 _ => (0, Constantes.CErr_Descriptteur + " Type de volume non pris en charge ou données insuffisantes."),
             };
         }
@@ -206,17 +206,17 @@ namespace ChronoComp
                     // longueur = aire de la base (supposée déjà connue)
                     return (longueur * hauteur, Constantes.C_Formule + "AireBase * Haut");
                 case ETypeVolume.MvCylindre:
-                    return (Math.PI * (longueur * longueur) * hauteur, Constantes.C_Formule + "π * Rayon² * Haut");
+                    return (ValPI * (longueur * longueur) * hauteur, Constantes.C_Formule + "π * Rayon² * Haut");
                 case ETypeVolume.MvCone:
-                    return (Math.PI * (longueur * longueur) * hauteur / 3, Constantes.C_Formule + "π * Rayon² * Haut / 3");
+                    return (ValPI * (longueur * longueur) * hauteur / 3, Constantes.C_Formule + "π * Rayon² * Haut / 3");
                 case ETypeVolume.MvTroncDeCone:
                     // longueur = grand rayon (R), largeur = petit rayon (r)
-                    return (Math.PI * hauteur / 3 * (longueur * longueur + longueur * largeur + largeur * largeur),
+                    return (ValPI * hauteur / 3 * (longueur * longueur + longueur * largeur + largeur * largeur),
                         Constantes.C_Formule + "π * Haut / 3 * (R² + Rr + r²)");
                 case ETypeVolume.MvSphere:
-                    return (4.0 / 3.0 * Math.PI * Math.Pow(longueur, 3), Constantes.C_Formule + "(4/3) * π * Rayon³");
+                    return (4.0 / 3.0 * ValPI * Math.Pow(longueur, 3), Constantes.C_Formule + "(4/3) * π * Rayon³");
                 case ETypeVolume.MvDemiSphere:
-                    return (2.0 / 3.0 * Math.PI * Math.Pow(longueur, 3), Constantes.C_Formule + "(2/3) * π * Rayon³");
+                    return (2.0 / 3.0 * ValPI * Math.Pow(longueur, 3), Constantes.C_Formule + "(2/3) * π * Rayon³");
                 case ETypeVolume.MvPyramide:
                     // longueur = base du triangle, largeur = hauteur du triangle de base, hauteur = hauteur de la pyramide
                     double aireBase = MSurface(ETypeSurface.MsTriangle_BH, longueur, largeur).Valeur;
@@ -229,7 +229,7 @@ namespace ChronoComp
                     return (Math.Pow(longueur, 3) / (6 * Math.Sqrt(2)), Constantes.C_Formule + "Long³ / (6√2)");
                 case ETypeVolume.MvTore:
                     // longueur = rayon du tore (R), largeur = rayon du tube (r)
-                    return (2 * Math.Pow(Math.PI, 2) * longueur * (largeur * largeur), Constantes.C_Formule + "2π² * R * r²");
+                    return (2 * Math.Pow(ValPI, 2) * longueur * (largeur * largeur), Constantes.C_Formule + "2π² * R * r²");
                 default:
                     return (0, Constantes.CErr_Descriptteur + " Type de volume non pris en charge ou données insuffisantes.");
             }

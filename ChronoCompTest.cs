@@ -1,4 +1,5 @@
-﻿using System;
+﻿global using static ChronoComp.Constantes;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -623,14 +624,14 @@ namespace ChronoComp
         public void MSurface_Cercle()
         {
             var (aire, _) = Geometrie.MSurface(ETypeSurface.MsCercle, 2);
-            Assert.Equal(Math.PI * 4, aire, 6);
+            Assert.Equal(ValPI * 4, aire, 6);
         }
 
         [Fact]
         public void MSurface3D_SphereTotale()
         {
             var (surface, _) = Geometrie.MSurface3D(EType3DSurface.Ms3Sphere_Totale, 3);
-            Assert.Equal(4 * Math.PI * 9, surface, 6);
+            Assert.Equal(4 * ValPI * 9, surface, 6);
         }
 
         [Fact]
@@ -644,7 +645,7 @@ namespace ChronoComp
         public void MVolume_Sphere()
         {
             var (volume, _) = Geometrie.MVolume(ETypeVolume.MvSphere, 3);
-            Assert.Equal(4.0 / 3.0 * Math.PI * 27, volume, 6);
+            Assert.Equal(4.0 / 3.0 * ValPI * 27, volume, 6);
         }
 
         [Theory]

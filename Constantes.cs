@@ -27,9 +27,11 @@ namespace ChronoComp
             public const int C_Deficient = -1;
             public const int C_Parfait = 0;
 
-            // ============================================================
-            // Les messages portent la formule de calcul, sauf quand il y a une erreur, là ils commencent par le descripteur
-            public const string C_Formule = "FORMULE ";
+             public const double ValPI = 3.14159265358979323;
+
+        // ============================================================
+        // Les messages portent la formule de calcul, sauf quand il y a une erreur, là ils commencent par le descripteur
+        public const string C_Formule = "FORMULE ";
             // Descripteur du message d'erreur
             public const string CErr_Descriptteur = "***ERREUR***";
         }
